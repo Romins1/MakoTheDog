@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAKO - El nuevo perro-tiburón de la familia</title>
+    <title>MAKO - El Imperio de la Energía y el Océano</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,17 +63,20 @@
 </head>
 <body class="relative min-h-screen py-6 px-3 md:py-10 md:px-8 overflow-x-hidden">
 
-    <!-- LIENZO DE COLOR AZUL CON COLLAGE DE IMÁGENES DE MAKO EN SEGUNDO PLANO -->
-    <div id="collage-canvas" class="fixed inset-0 -z-50 bg-gradient-to-tr from-sky-100 via-blue-100/80 to-indigo-100/60 overflow-hidden pointer-events-none select-none">
-        <!-- Las imágenes del collage se inyectarán de forma aleatoria aquí mediante JavaScript -->
+    <!-- LIENZO DE COLOR AZUL CON COLLAGE - Solo visible en Escritorio/Tablet (md) para evitar saturación en móvil -->
+    <div id="collage-canvas" class="hidden md:block fixed inset-0 -z-50 bg-gradient-to-tr from-sky-100 via-blue-100/80 to-indigo-100/60 overflow-hidden pointer-events-none select-none">
+        <!-- Las imágenes del collage de fondo se inyectarán aquí mediante JavaScript solo en pantallas grandes -->
     </div>
 
-    <!-- CONTENEDOR DE BLOQUES INDEPENDIENTES (Súper dinámico y con respiración entre tarjetas) -->
+    <!-- Fondo de color simplificado para la vista móvil -->
+    <div class="block md:hidden fixed inset-0 -z-50 bg-gradient-to-tr from-sky-100 via-blue-50 to-indigo-100 pointer-events-none select-none"></div>
+
+    <!-- CONTENEDOR DE BLOQUES INDEPENDIENTES -->
     <div class="max-w-4xl mx-auto space-y-6 md:space-y-8 relative z-10">
         
         <!-- Bloque 1: Cabecera Estilo Flotante -->
         <header class="wave-bg text-white text-center py-8 px-4 md:py-10 md:px-6 rounded-3xl shadow-xl border-4 border-oceanblue relative overflow-hidden">
-            <!-- Cenefas maoríes solo en la cabecera para darle identidad -->
+            <!-- Cenefas maoríes -->
             <div class="absolute top-4 left-4 w-10 h-10 border-t-4 border-l-4 border-goldaccent rounded-tl-lg opacity-60"></div>
             <div class="absolute top-4 right-4 w-10 h-10 border-t-4 border-r-4 border-goldaccent rounded-tr-lg opacity-60"></div>
 
@@ -91,6 +95,22 @@
             <div class="w-24 h-1 bg-goldaccent mx-auto rounded-full"></div>
         </header>
 
+        <!-- NOVEDAD MÓVIL: Galería Superior (Fotos 1, 2 y 3) - Oculta en Desktop -->
+        <div class="block md:hidden space-y-2">
+            <p class="text-center text-xs font-bold text-oceanblue/60 uppercase tracking-widest">📸 Momentos de Mako</p>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-md border-2 border-white bg-white">
+                    <img src="./collage1.png" alt="Mako collage 1" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/0B3C5D/FFFFFF?text=Mako+1'">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-md border-2 border-white bg-white">
+                    <img src="./collage2.png" alt="Mako collage 2" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/0B3C5D/FFFFFF?text=Mako+2'">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-md border-2 border-white bg-white">
+                    <img src="./collage3.png" alt="Mako collage 3" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/0B3C5D/FFFFFF?text=Mako+3'">
+                </div>
+            </div>
+        </div>
+
         <!-- Bloque 2: El Saltómetro Interactivo -->
         <section class="glass-card rounded-3xl shadow-xl p-4 md:p-8 relative">
             <h2 class="text-center font-title font-bold text-lg md:text-2xl text-oceanblue mb-3">
@@ -100,7 +120,7 @@
                 Arrastra el control de energía para comparar la impresionante capacidad de salto de un Tiburón Mako con la agilidad de Mako para saltar cuando ve los caramelos, los juguetes o cuando Paula vuelve de trabajar.
             </p>
 
-            <!-- Área de comparación de salto: siempre en 2 columnas lado a lado para evitar colapso vertical en móviles -->
+            <!-- Área de comparación de salto -->
             <div class="grid grid-cols-2 gap-4 sm:gap-8 max-w-2xl mx-auto items-end h-[240px] md:h-[260px] relative mb-8">
                 
                 <!-- Área de Salto del Tiburón Mako -->
@@ -131,19 +151,18 @@
 
             </div>
 
-            <!-- El Control Deslizante (Slider) - z-30 para asegurar que esté sobre todo en móvil -->
+            <!-- El Control Deslizante (Slider) -->
             <div class="max-w-md mx-auto bg-slate-50 p-4 rounded-2xl shadow-inner border border-slate-100 relative z-30">
                 <div class="flex justify-between text-[10px] sm:text-xs font-bold text-slate-500 mb-2">
                     <span>⚡ Energía: Desperezándose 🐕</span>
                     <span>¡MÁXIMA ADRENALINA! 🔥</span>
                 </div>
-                <!-- Touch-action manipulation para mejorar responsividad táctil de la barra -->
                 <input type="range" id="jumpSlider" min="0" max="100" value="0" 
                        class="w-full h-4 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-skyblue touch-none py-1">
             </div>
         </section>
 
-        <!-- Bloques 3, 4 y 5: Los Pilares del Nombre (Tarjetas Independientes que flotan sobre el collage) -->
+        <!-- Bloques 3, 4 y 5: Los Pilares del Nombre -->
         <main class="space-y-6">
             
             <!-- Pilar I: Conexión Familiar -->
@@ -204,6 +223,22 @@
 
         </main>
 
+        <!-- NOVEDAD MÓVIL: Galería Inferior (Fotos 4, 5 y 6) - Oculta en Desktop -->
+        <div class="block md:hidden space-y-2">
+            <p class="text-center text-xs font-bold text-oceanblue/60 uppercase tracking-widest">📸 Mako en Acción</p>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-md border-2 border-white bg-white">
+                    <img src="./collage4.png" alt="Mako collage 4" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/0B3C5D/FFFFFF?text=Mako+4'">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-md border-2 border-white bg-white">
+                    <img src="./collage5.png" alt="Mako collage 5" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/0B3C5D/FFFFFF?text=Mako+5'">
+                </div>
+                <div class="aspect-square rounded-2xl overflow-hidden shadow-md border-2 border-white bg-white">
+                    <img src="./collage6.png" alt="Mako collage 6" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/150x150/0B3C5D/FFFFFF?text=Mako+6'">
+                </div>
+            </div>
+        </div>
+
         <!-- Bloque 6: Bautizo de Mako -->
         <div class="glass-card rounded-3xl p-6 md:p-8 text-center shadow-lg border border-sky-100">
             <button onclick="launchBaptism()" class="bg-gradient-to-r from-oceanblue to-skyblue hover:from-skyblue hover:to-oceanblue text-white font-title font-bold text-sm md:text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 tracking-wide">
@@ -229,10 +264,15 @@
     </div>
 
     <script>
-        // Lógica para generar el collage de Mako en el lienzo del fondo con placeholders reforzados y densos
+        // Lógica para generar el collage de Mako en el lienzo del fondo (Solo se ejecuta y carga si es escritorio)
         window.addEventListener('DOMContentLoaded', () => {
+            // Evaluamos el ancho de pantalla. Si es menor a 768px (móvil), no inyectamos elementos pesados al fondo.
+            if (window.innerWidth < 768) return;
+
             const container = document.getElementById('collage-canvas');
-            const totalCollageImages = 40; // Incrementado a 40 imágenes para poblar el fondo por completo
+            if (!container) return;
+
+            const totalCollageImages = 40; 
             const imagePaths = [
                 './collage1.png',
                 './collage2.png',
@@ -244,35 +284,30 @@
 
             for (let i = 0; i < totalCollageImages; i++) {
                 const img = document.createElement('img');
-                const imageIndex = i % imagePaths.length; // Cicla de manera equitativa por los 6 archivos
+                const imageIndex = i % imagePaths.length; 
                 img.src = imagePaths[imageIndex];
                 img.alt = `Mako collage element ${imageIndex + 1}`;
                 
-                // Estilos base de las imágenes flotantes en el fondo suave (Opacidad de imágenes reales al 18%)
                 img.className = "absolute object-cover rounded-2xl shadow-md opacity-[0.18] transition-all duration-500 select-none pointer-events-none border border-oceanblue/10";
                 
-                // Si la imagen local no existe, se degrada a un marcador con fuerte color azul y contraste alto (Opacidad al 28%)
                 img.onerror = function() {
                     this.src = `https://placehold.co/150x150/0B3C5D/FFFFFF?text=Mako+${imageIndex + 1}`;
                     this.style.opacity = "0.28"; 
                 };
 
-                // Cálculo de distribución pseudo-aleatoria óptima para 40 imágenes (8 columnas x 5 filas)
                 const columns = 8;
                 const rows = 5;
                 const col = i % columns;
                 const row = Math.floor(i / columns);
                 
-                // Variabilidad aleatoria para que no quede ultra-rígido
-                const randomXOffset = (Math.random() * 8) - 4; // -4% a +4%
-                const randomYOffset = (Math.random() * 8) - 4; // -4% a +4%
+                const randomXOffset = (Math.random() * 8) - 4; 
+                const randomYOffset = (Math.random() * 8) - 4; 
                 
                 const left = (col * (100 / columns)) + (100 / columns / 2) + randomXOffset;
                 const top = (row * (100 / rows)) + (100 / rows / 2) + randomYOffset;
 
-                // Tamaños ligeramente más compactos (75px a 105px) para dar mayor densidad sin cansar la vista
                 const size = Math.floor(Math.random() * 30) + 75; 
-                const rotation = Math.floor(Math.random() * 36) - 18; // Rotación de hasta -18deg a 18deg
+                const rotation = Math.floor(Math.random() * 36) - 18; 
 
                 img.style.left = `${left}%`;
                 img.style.top = `${top}%`;
@@ -293,20 +328,15 @@
         const sharkLabel = document.getElementById('shark-height-label');
 
         slider.addEventListener('input', (e) => {
-            const value = e.target.value; // Escala de 0 a 100 %
+            const value = e.target.value; 
             
-            // Mako el perro (Bodeguero-Podenco) alcanza saltos de ~2.1 metros
             const dogJumpY = (value / 100) * 115; 
-            // Añadimos una pequeña rotación hacia arriba al saltar para imitar su silueta arqueada en el aire
             dog.style.transform = `translateY(-${dogJumpY}px) rotate(-${value * 0.08}deg)`;
             
-            // Calculamos la distancia métrica realista del salto
             const dogMeters = ((value / 100) * 2.1).toFixed(1);
             dogLabel.innerText = `Salto: ${dogMeters}m`;
 
-            // El Tiburón Mako (Isurus) es capaz de saltar de forma increíble hasta 9 metros sobre el agua
             const sharkJumpY = (value / 100) * 135;
-            // Rotación oblicua pronunciada para emular la salida del agua
             shark.style.transform = `translateY(-${sharkJumpY}px) rotate(-${value * 0.12}deg)`;
             
             const sharkMeters = ((value / 100) * 9.0).toFixed(1);
@@ -315,14 +345,12 @@
 
         // Lógica de lanzamiento de confeti para el bautizo oficial
         function launchBaptism() {
-            // Ráfaga izquierda (tonos oceánicos y dorados)
             confetti({
                 particleCount: 150,
                 spread: 80,
                 origin: { y: 0.6, x: 0.2 },
                 colors: ['#0B3C5D', '#328CC1', '#D9B310', '#34d399']
             });
-            // Ráfaga derecha
             confetti({
                 particleCount: 150,
                 spread: 80,
@@ -330,7 +358,6 @@
                 colors: ['#0B3C5D', '#328CC1', '#D9B310', '#34d399']
             });
 
-            // Explosión de estrellas doradas en el centro
             setTimeout(() => {
                 confetti({
                     particleCount: 80,
@@ -344,3 +371,5 @@
     </script>
 </body>
 </html>
+
+```
