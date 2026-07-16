@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAKO - El Imperio de la Energía y el Océano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti para la celebración del Bautizo Oficial -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oceanblue: '#0B3C5D',
+                        skyblue: '#328CC1',
+                        goldaccent: '#D9B310',
+                        charcoal: '#1D2731',
+                        softgray: '#F5F7FA'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        title: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .wave-bg {
+            background-image: radial-gradient(circle at 50% 120%, #1e4f70 0%, #0b3c5d 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(50, 140, 193, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px -10px rgba(11, 60, 93, 0.2);
+            border-color: rgba(50, 140, 193, 0.4);
+        }
+        /* Transiciones fluidas para el movimiento físico de los saltos */
+        #interactive-dog, #interactive-shark {
+            transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        @keyframes floatWave {
+            0%, 100% { transform: translateY(0) scaleY(1); }
+            50% { transform: translateY(-5px) scaleY(1.05); }
+        }
+        .animate-wave {
+            animation: floatWave 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen py-8 px-4 md:px-8 overflow-x-hidden">
+
+    <!-- LIENZO DE COLOR AZUL CON COLLAGE DE IMÁGENES DE MAKO EN SEGUNDO PLANO -->
+    <div id="collage-canvas" class="fixed inset-0 -z-50 bg-gradient-to-tr from-sky-100 via-blue-100/70 to-indigo-100/50 overflow-hidden pointer-events-none select-none">
+        <!-- Las imágenes del collage se inyectarán de forma aleatoria aquí mediante JavaScript -->
+    </div>
+
+    <!-- Contenedor Principal de la Tarjeta -->
+    <div class="max-w-5xl mx-auto bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden border-4 border-oceanblue relative z-10">
+        
+        <!-- Cenefas tribales en las esquinas inspiradas en la cultura Maorí -->
+        <div class="absolute top-4 left-4 w-12 h-12 border-t-4 border-l-4 border-goldaccent rounded-tl-xl opacity-70"></div>
+        <div class="absolute top-4 right-4 w-12 h-12 border-t-4 border-r-4 border-goldaccent rounded-tr-xl opacity-70"></div>
+        <div class="absolute bottom-4 left-4 w-12 h-12 border-b-4 border-l-4 border-goldaccent rounded-bl-xl opacity-70"></div>
+        <div class="absolute bottom-4 right-4 w-12 h-12 border-b-4 border-r-4 border-goldaccent rounded-br-xl opacity-70"></div>
+
+        <!-- Cabecera decorativa estilo Océano profundo -->
+        <header class="wave-bg text-white text-center py-12 px-6 relative overflow-hidden">
+            <div class="absolute top-10 left-10 w-4 h-4 rounded-full bg-white/10 animate-bounce" style="animation-duration: 3s;"></div>
+            <div class="absolute top-24 right-20 w-8 h-8 rounded-full bg-white/5 animate-pulse"></div>
+            <div class="absolute bottom-6 left-1/4 w-6 h-6 rounded-full bg-white/10 animate-bounce" style="animation-duration: 5s;"></div>
+
+            <div class="inline-block px-4 py-1.5 bg-goldaccent/20 border border-goldaccent/40 rounded-full text-goldaccent text-xs font-bold tracking-widest mb-4 uppercase">
+                🧬 Un Nombre, Tres Destinos Infinitos
+            </div>
+            <h1 class="font-title font-extrabold text-6xl md:text-7xl tracking-tighter text-white drop-shadow-md mb-2">
+                MAKO
+            </h1>
+            <p class="font-title text-skyblue font-semibold text-sm md:text-lg tracking-widest uppercase mb-4">
+                — ¡El nuevo perro-tiburón de la familia! —
+            </p>
+            <div class="w-24 h-1 bg-goldaccent mx-auto rounded-full"></div>
+        </header>
+
+        <!-- Sección del Saltómetro -->
+        <section class="bg-gradient-to-b from-sky-50 to-white py-10 px-6 border-b border-sky-100">
+            <h2 class="text-center font-title font-bold text-xl md:text-2xl text-oceanblue mb-6">
+                ⚡ ¡El Saltómetro Interactivo de Mako!
+            </h2>
+            <p class="text-center text-sm text-slate-500 max-w-2xl mx-auto mb-8">
+                Arrastra el control de energía para comparar la impresionante capacidad de salto de un Tiburón Mako con la agilidad de Mako para saltar cuando ve los caramelos, los juguetes o cuando Paula vuelve de trabajar.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto items-end h-[260px] relative mb-10">
+                
+                <!-- Área de Salto del Tiburón Mako -->
+                <div class="flex flex-col items-center justify-end h-full relative border-r border-dashed border-sky-200/80 pr-4">
+                    <span class="absolute top-0 left-4 text-xs font-bold text-oceanblue/40 uppercase tracking-widest">Tiburón Mako (Isurus oxyrinchus)</span>
+                    
+                    <div id="interactive-shark" class="w-48 h-48 flex items-center justify-center transform translate-y-0">
+                        <img src="./tiburon.png" alt="Tiburón Mako" class="max-w-full max-h-full object-contain drop-shadow-xl" onerror="this.src='https://placehold.co/300x300/0B3C5D/FFFFFF?text=Foto+Tiburon'">
+                    </div>
+                    <!-- Indicador del nivel del agua -->
+                    <div class="w-full h-6 bg-skyblue/30 rounded-t-full relative z-10 flex items-center justify-center">
+                        <span id="shark-height-label" class="text-xs font-extrabold text-oceanblue">Salto: 0m</span>
+                    </div>
+                </div>
+
+                <!-- Área de Salto de Mako Perro -->
+                <div class="flex flex-col items-center justify-end h-full relative pl-4">
+                    <span class="absolute top-0 right-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Mako el Perro (Bodeguero-Podenco)</span>
+                    
+                    <div id="interactive-dog" class="w-48 h-48 flex items-center justify-center transform translate-y-0">
+                        <img src="./mako.png" alt="Mako el perro" class="max-w-full max-h-full object-contain drop-shadow-xl" onerror="this.src='https://placehold.co/300x300/1D2731/FFFFFF?text=Foto+Mako'">
+                    </div>
+                    <!-- Indicador del césped / tierra -->
+                    <div class="w-full h-6 bg-emerald-500/30 rounded-t-full relative z-10 flex items-center justify-center">
+                        <span id="dog-height-label" class="text-xs font-extrabold text-emerald-800">Salto: 0m</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- El Control Deslizante (Slider) -->
+            <div class="max-w-md mx-auto bg-slate-100 p-4 rounded-2xl shadow-inner border border-slate-200">
+                <div class="flex justify-between text-xs font-bold text-slate-500 mb-2">
+                    <span>⚡ Adrenalina: Desperezándose 🐕</span>
+                    <span>¡SALTO DE MÁXIMA ENERGÍA! 🔥</span>
+                </div>
+                <input type="range" id="jumpSlider" min="0" max="100" value="0" 
+                       class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-skyblue">
+            </div>
+        </section>
+
+        <!-- Contenido de Pilares -->
+        <main class="p-6 md:p-10 grid grid-cols-1 gap-8 relative z-10">
+            
+            <!-- Pilar I: Conexión Familiar -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center">
+                <div class="flex flex-col items-center gap-3 shrink-0">
+                    <img src="./miley.png" alt="Miley" class="w-20 h-20 rounded-full object-cover border-4 border-skyblue shadow-lg" onerror="this.src='https://placehold.co/150x150/328CC1/FFFFFF?text=Foto+Miley'">
+                    <div class="w-10 h-10 rounded-full bg-oceanblue/10 flex items-center justify-center border-2 border-oceanblue/20">
+                        <span class="text-xl">🧬</span>
+                    </div>
+                </div>
+                <div class="grow">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-xs font-bold tracking-wider text-oceanblue uppercase bg-oceanblue/10 px-2.5 py-1 rounded-md">Pilar I</span>
+                        <h3 class="font-title font-bold text-lg md:text-xl text-oceanblue">La Saga de la "M" (Conexión Familiar)</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                        La letra <strong class="text-oceanblue font-bold">M</strong> unifica a vuestros compañeros. Mako comparte inicial con su hermana perruna <strong class="text-skyblue font-bold">Miley</strong>. Además de compartir la inicial, los dos reflejan el mismo espíritu feliz: un incondicional <strong class="text-goldaccent font-bold">amor por el agua</strong> (¡Mako estrenando pronto su piscina!) y una agilidad asombrosa para <strong class="text-oceanblue font-bold">saltar de alegría</strong> ante cualquier juego.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pilar II: El Tiburón Mako -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center">
+                <div class="w-16 h-16 rounded-full bg-skyblue/10 flex items-center justify-center shrink-0 border-2 border-skyblue/20">
+                    <span class="text-3xl">🦈</span>
+                </div>
+                <div class="grow">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-xs font-bold tracking-wider text-skyblue uppercase bg-skyblue/10 px-2.5 py-1 rounded-md">Pilar II</span>
+                        <h3 class="font-title font-bold text-lg md:text-xl text-oceanblue">El Tiburón Mako (Agua y Velocidad)</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                        En vuestro primer encuentro en la protectora, Mako os fascinó por su enérgica bienvenida: <strong class="text-oceanblue font-bold">¡no paraba de dar saltos de locura en su box!</strong>. El Tiburón Mako es, de hecho, mundialmente conocido por ser un nadador ultra veloz que ama el océano abierto y ostenta el título de <strong class="text-oceanblue font-bold">el tiburón más saltarín del planeta</strong>, elevándose majestuosamente sobre el agua.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pilar III: La Raíz Maorí -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center">
+                <!-- Dibujo Vectorial del Diente Maorí -->
+                <div class="w-16 h-16 shrink-0 flex items-center justify-center relative">
+                    <svg class="w-full h-full text-goldaccent" viewBox="0 0 100 100" fill="currentColor">
+                        <path d="M50,5 L50,30" stroke="#1D2731" stroke-width="3" stroke-linecap="round" />
+                        <path d="M35,30 C45,28 55,28 65,30 C60,35 40,35 35,30 Z" fill="#D9B310" />
+                        <path d="M35,30 C40,55 48,75 50,85 C52,75 60,55 65,30 C55,33 45,33 35,30 Z" fill="#F5F7FA" stroke="#0B3C5D" stroke-width="4" />
+                        <circle cx="50" cy="32" r="3" fill="#1D2731" />
+                    </svg>
+                </div>
+                <div class="grow">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="text-xs font-bold tracking-wider text-goldaccent uppercase bg-goldaccent/10 px-2.5 py-1 rounded-md">Pilar III</span>
+                        <h3 class="font-title font-bold text-lg md:text-xl text-oceanblue">La Raíz Ancestral (El Diente Protector)</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                        En el idioma nativo de Nueva Zelanda, el <strong class="text-goldaccent font-bold">Maorí</strong>, la palabra <strong class="text-goldaccent font-bold">Mako</strong> significa literalmente <em>"tiburón"</em> o <em>"diente de tiburón"</em>. Los dientes de Mako se han considerado tradicionalmente amuletos sagrados que otorgan <strong class="text-oceanblue font-bold">fuerza espiritual, agilidad física, protección familiar y coraje frente a la adversidad</strong>. ¡Un nombre imbatible para vuestro nuevo protector de la casa!
+                    </p>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Botón de Bautizo con Confeti -->
+        <div class="text-center pb-8 pt-4 px-6 relative z-10">
+            <button onclick="launchBaptism()" class="bg-gradient-to-r from-oceanblue to-skyblue hover:from-skyblue hover:to-oceanblue text-white font-title font-bold text-sm md:text-base px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 tracking-wide">
+                🌊 ¡Oficializar Nombre de Mako! 🩺
+            </button>
+            <p class="text-xs text-slate-400 mt-2">¡Haz clic para celebrar que ya tiene su nombre oficial en el microchip!</p>
+        </div>
+
+        <!-- Pie de Página -->
+        <footer class="bg-slate-50 border-t border-slate-100 py-8 px-6 text-center relative z-10">
+            <div class="max-w-2xl mx-auto">
+                <p class="font-title italic text-sm md:text-base text-slate-500 leading-relaxed">
+                    “Mako llegó saltando a vuestras vidas y ha encontrado su puerto seguro. Que el agua siempre sea su juego, Miley su compañera y vuestro hogar su océano de felicidad.”
+                </p>
+                <div class="mt-4 flex items-center justify-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                    <span>Creado con cariño</span>
+                    <span class="text-rose-500">❤️</span>
+                    <span>Para Mako, Miley y nuestra hermosa familia</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Lógica para generar el collage de Mako en el lienzo del fondo con placeholders reforzados
+        window.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('collage-canvas');
+            const totalCollageImages = 20; // Número total de imágenes repartidas en el fondo
+            const imagePaths = [
+                './collage1.png',
+                './collage2.png',
+                './collage3.png',
+                './collage4.png',
+                './collage5.png',
+                './collage6.png'
+            ];
+
+            for (let i = 0; i < totalCollageImages; i++) {
+                const img = document.createElement('img');
+                const imageIndex = i % imagePaths.length; // Cicla de manera equitativa por los 6 archivos
+                img.src = imagePaths[imageIndex];
+                img.alt = `Mako collage element ${imageIndex + 1}`;
+                
+                // Estilos base de las imágenes flotantes en el fondo suave
+                img.className = "absolute object-cover rounded-2xl shadow-md opacity-[0.12] transition-all duration-500 select-none pointer-events-none border border-oceanblue/5";
+                
+                // Si la imagen local no existe, se degrada a un marcador con fuerte color azul y contraste alto
+                img.onerror = function() {
+                    this.src = `https://placehold.co/150x150/0B3C5D/FFFFFF?text=Mako+${imageIndex + 1}`;
+                    this.style.opacity = "0.22"; // Incrementamos la opacidad si son placeholders para que se vean más
+                };
+
+                // Cálculo de distribución pseudo-aleatoria (evita amontonamientos feos dividiendo en sectores)
+                const columns = 5;
+                const rows = 4;
+                const col = i % columns;
+                const row = Math.floor(i / columns);
+                
+                // Añadimos variabilidad aleatoria dentro de cada sector para un aspecto orgánico
+                const randomXOffset = (Math.random() * 12) - 6; // -6% a +6%
+                const randomYOffset = (Math.random() * 12) - 6; // -6% a +6%
+                
+                const left = (col * (100 / columns)) + (100 / columns / 2) + randomXOffset;
+                const top = (row * (100 / rows)) + (100 / rows / 2) + randomYOffset;
+
+                // Tamaños y rotaciones ligeramente aleatorias
+                const size = Math.floor(Math.random() * 40) + 90; // Entre 90px y 130px
+                const rotation = Math.floor(Math.random() * 30) - 15; // Entre -15deg y 15deg
+
+                img.style.left = `${left}%`;
+                img.style.top = `${top}%`;
+                img.style.width = `${size}px`;
+                img.style.height = `${size}px`;
+                img.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+                
+                container.appendChild(img);
+            }
+        });
+
+        // Lógica interactiva para mover las siluetas vectoriales de forma realista
+        const slider = document.getElementById('jumpSlider');
+        const dog = document.getElementById('interactive-dog');
+        const shark = document.getElementById('interactive-shark');
+        
+        const dogLabel = document.getElementById('dog-height-label');
+        const sharkLabel = document.getElementById('shark-height-label');
+
+        slider.addEventListener('input', (e) => {
+            const value = e.target.value; // Escala de 0 a 100 %
+            
+            // Mako el perro (Bodeguero-Podenco) alcanza saltos de ~2.1 metros
+            const dogJumpY = (value / 100) * 115; 
+            // Añadimos una pequeña rotación hacia arriba al saltar para imitar su silueta arqueada en el aire
+            dog.style.transform = `translateY(-${dogJumpY}px) rotate(-${value * 0.08}deg)`;
+            
+            // Calculamos la distancia métrica realista del salto
+            const dogMeters = ((value / 100) * 2.1).toFixed(1);
+            dogLabel.innerText = `Salto: ${dogMeters}m`;
+
+            // El Tiburón Mako (Isurus) es capaz de saltar de forma increíble hasta 9 metros sobre el agua
+            const sharkJumpY = (value / 100) * 135;
+            // Rotación oblicua pronunciada para emular la salida del agua
+            shark.style.transform = `translateY(-${sharkJumpY}px) rotate(-${value * 0.12}deg)`;
+            
+            const sharkMeters = ((value / 100) * 9.0).toFixed(1);
+            sharkLabel.innerText = `Salto: ${sharkMeters}m`;
+        });
+
+        // Lógica de lanzamiento de confeti para el bautizo oficial
+        function launchBaptism() {
+            // Ráfaga izquierda (tonos oceánicos y dorados)
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6, x: 0.2 },
+                colors: ['#0B3C5D', '#328CC1', '#D9B310', '#34d399']
+            });
+            // Ráfaga derecha
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6, x: 0.8 },
+                colors: ['#0B3C5D', '#328CC1', '#D9B310', '#34d399']
+            });
+
+            // Explosión de estrellas doradas en el centro
+            setTimeout(() => {
+                confetti({
+                    particleCount: 80,
+                    angle: 90,
+                    spread: 360,
+                    origin: { y: 0.5 },
+                    colors: ['#D9B310', '#ffffff'],
+                });
+            }, 300);
+        }
+    </script>
+</body>
+</html>
